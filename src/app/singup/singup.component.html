@@ -1,0 +1,159 @@
+<!-- <p>singup works!</p> -->
+<div class="container  ">
+
+    <form #sinngupForm="ngForm" (ngSubmit)="loginForm(sinngupForm.value)">
+        <div class="row offset-md-2 d-flex flex-column w-50 p-3" style="background-color:rgba(16, 102, 5, 0.658);">
+            <h1 class=" bg-success">Sign Up Form</h1>
+
+            <div class="col ">
+                <label for="Fullname ">Name</label>
+                <input type="text " required minlength="4" #name="ngModel" class="form-control " id="Fullname " name="Fullname " placeholder="user i'd" ngModel>
+                <span *ngIf="name.invalid && name.touched" style="color: red;">*plese enter user </span><br>
+                <div *ngIf="name.errors?.['minlength']" style="color: red;">
+                    Name must be at least 4 characters long.
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col ">
+                    <label for="email">Email: </label>
+                    <input type="email" class="form-control" placeholder="Enter email" name="email" ngModel pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required #email="ngModel" [class.is-invalid]="email.invalid && email.touched ">
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert" style="color: red;">
+
+                        <div *ngIf="email.errors?.['required']" style="color: red;">
+                            *Field is required.
+                        </div>
+                        <div *ngIf="email.errors?.['pattern']" style="color: red;">
+                            *email is not valid.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- <div class="form-group">
+                        <div class="col ">
+
+                            <label for="inputpassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" required #inputpassword="ngModel" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$" id="inputpassword" name="inputpassword" placeholder="Password(required)" ngModel>
+                            <div *ngIf="inputpassword.invalid && (inputpassword.dirty || inputpassword.touched)" class="text-danger">
+
+                                <div *ngIf="inputpassword.errors?.['required']">
+                                    Password is required.
+                                </div>
+
+                                <div *ngIf="inputpassword.errors?.['pattern']">
+                                    password must be eight characters including one uppercase letter, one special character and alphanumeric characters
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col ">
+
+                                    <label for="comfpassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control" required #comfpassword="ngModel" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$" id="comfpassword" name="comfpassword" placeholder="Password(required)" ngModel>
+                                    <div *ngIf="comfpassword.invalid && (comfpassword.dirty || comfpassword.touched)" class="text-danger">
+
+                                        <div *ngIf="comfpassword.errors?.['required']">
+                                            Password is required.
+                                        </div>
+
+                                        <div *ngIf="comfpassword.errors?.['pattern']">
+                                            password must be eight characters including one uppercase letter, one special character and alphanumeric characters
+                                        </div>
+                                    </div>
+                                </div> -->
+            <br>
+            <!-- <div class="col ">
+                            <label for="Password ">confirm pwd:</label>
+                            <input type="text " required #conpassward="ngModel" class="form-control " id="cPassword " name="cPassword" placeholder="comfirm pswd" ngModel>
+                            <span *ngIf="conpassward.invalid && conpassward.touched " style="color:red ">*plese enter valid passward</span>
+                        </div>
+                        <br> -->
+
+
+            <div ngModelGroup="passwords" #passwords="ngModelGroup" appCheckPassword>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password1</label>
+                    <input type="password" #conpassward="ngModel" class="form-control" id="exampleInputPassword1" placeholder="Password1" #passwordA="ngModel" name="passwordA" required id="passwordA" [(ngModel)]="password1">
+                </div>
+                passwordA is {{password1}}
+                <span *ngIf="conpassward.invalid && conpassward.touched " style="color:red ">*plese enter valid passward</span>
+
+
+                <div class="form-group mt-1">
+                    <label for="exampleInputPassword2">Password2</label>
+                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password2" #passwordB="ngModel" name="passwordB" required id="passwordB" [(ngModel)]="password2">
+                </div>
+                passwordB is {{password2}}
+            </div>
+            <div *ngIf="passwordB.invalid && (passwordA.dirty || passwordA.touched)" class="alert alert-danger">
+                Please confirm your password.
+            </div>
+            <div *ngIf="passwords.errors?.['passwordCheck'] && (passwordB.dirty || passwordB.touched)" class="alert alert-danger">
+                Passwords do not match.
+            </div>
+
+
+
+
+
+            <select type="text" class="form-control invalid" id="field_investorTypeId" required #gender="ngModel" ngModel name="gender" placeholder="Gender">
+                <option value="" selected disabled>--Select--</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="other">other</option>
+            </select>
+
+            <span *ngIf="gender.invalid && gender.touched" style="color:red ">*Gender
+                required.</span>
+            <br>
+
+            <p>Select one </p>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" required #radio="ngModel" id="radio1" name="optradio" value="option1" ngModel>Admin
+                <label class="form-check-label" for="radio1"></label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" required #radio="ngModel" ngModel id="radio2" name="optradio" value="option2">not admin
+                <label class="form-check-label" for="radio2"></label>
+                <!-- <span *ngIf="gender.invalid && gender.touched" style="color:red ">*Gender required.</span> -->
+            </div>
+            <span *ngIf="radio.invalid && radio.touched" style="color:red ">*Gender
+                required.</span>
+
+            <!-- <br>
+            <input type="text" id="name" name="name" class="form-control" required appForbiddenName="bob" ngModel #name="ngModel">
+
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+
+                <div *ngIf="name.errors?.['required']">
+                    Name is required.
+                </div>
+                <div *ngIf="name.errors?.['minlength']">
+                    Name must be at least 4 characters long.
+                </div>
+                <div *ngIf="name.errors?.['forbiddenName']">
+                    Name cannot be Bob.
+                </div>
+
+            </div> -->
+            <br>
+            <div class="form-check">
+                <input type="checkbox" required #check="ngModel" ngModel name="active" ngModel required>
+                <label class="form-check-label" for="flexCheckIndeterminate">
+                    Are You Agree
+                </label>
+                <span *ngIf="check.invalid && check.touched" style="color:red ">*select
+                    required.</span>
+            </div>
+
+
+
+
+            <button type="button" (click)=" ShowSuccess() " class="btn btn-info w-25 p-3 " value="submit " [disabled]="sinngupForm.invalid">Submit</button>
+        </div>
+
+
+    </form>
+</div>
